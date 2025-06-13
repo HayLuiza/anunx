@@ -36,7 +36,7 @@ export default function Home() {
                 sx={{
                   paddingTop: '56%',
                 }}
-                image={'https://source.unsplash.com/random'}
+                image="https://source.unsplash.com/random"
                 title="Título da imagem"
               />
               <CardContent>
