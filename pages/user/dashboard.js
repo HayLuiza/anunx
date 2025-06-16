@@ -29,14 +29,15 @@ export default function Home() {
         </Button>
       </Container>
       <Container maxWidth="md">
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
             <Card>
               <CardMedia
                 sx={{
                   paddingTop: '56%',
+                  width: 250,
                 }}
-                image="https://source.unsplash.com/random"
+                image="https://picsum.photos/600/400"
                 title="Título da imagem"
               />
               <CardContent>
@@ -63,8 +64,9 @@ export default function Home() {
               <CardMedia
                 sx={{
                   paddingTop: '56%',
+                  width: 250,
                 }}
-                image={'https://source.unsplash.com/random'}
+                image={'https://picsum.photos/600/400'}
                 title="Título da imagem"
               />
               <CardContent>
@@ -91,8 +93,9 @@ export default function Home() {
               <CardMedia
                 sx={{
                   paddingTop: '56%',
+                  width: 250,
                 }}
-                image={'https://source.unsplash.com/random'}
+                image={'https://picsum.photos/600/400'}
                 title="Título da imagem"
               />
               <CardContent>
@@ -120,8 +123,9 @@ export default function Home() {
               <CardMedia
                 sx={{
                   paddingTop: '56%',
+                  width: 250,
                 }}
-                image={'https://source.unsplash.com/random'}
+                image={'https://picsum.photos/600/400'}
                 title="Título da imagem"
               />
               <CardContent>
