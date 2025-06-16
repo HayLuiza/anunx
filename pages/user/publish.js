@@ -5,7 +5,11 @@ import {
   TextField,
   Typography,
   Button,
-  IconButton
+  IconButton,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
 } from '@mui/material'
 
 import { useState } from 'react'
@@ -203,6 +207,25 @@ const Publish = () => {
             variant="outlined"
             fullWidth          
           />
+        </Box>
+      </Container>
+      
+      <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3)}}>
+        <Box sx={{
+          backgroundColor: theme.palette.background.white,
+          padding: theme.spacing(3),
+        }}>
+          <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
+            Preço 
+          </Typography>
+          <FormControl fullWidth variant="outlined">
+            <InputLabel>Valor</InputLabel>
+            <OutlinedInput 
+              onChange={() => {}}
+              startAdornment={<InputAdornment position="start">R$</InputAdornment>}
+              label="Valor"
+            />
+          </FormControl>
         </Box>
       </Container>
 
