@@ -33,7 +33,7 @@ const Home = () => {
         </Paper>       
       </Container>
 
-      <Container maxWidth="md" sx={{py: 6}}>
+      <Container maxWidth="lg" sx={{py: 6}}>
         <Typography component="h2" variant="h4" align="center" color="textPrimary">
           Destaques
         </Typography>
