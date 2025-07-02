@@ -12,7 +12,7 @@ const Card = ({image, title, subtitle, actions }) => {
       <CardMedia
         sx={{
           paddingTop: '56%',
-          width: 250,
+          width: 350,
         }}
         image={image}
         title={title}

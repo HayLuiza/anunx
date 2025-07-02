@@ -13,7 +13,6 @@ import {
   Divider,
   MenuItem, 
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { AccountCircle } from '@mui/icons-material';
 
 export default function ButtonAppBar() {
@@ -26,15 +25,7 @@ export default function ButtonAppBar() {
       <AppBar position="static" elevation={3} sx={{backgroundColor:"#000000"}}>
         <Container maxWidth="lg">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Anunx
             </Typography>

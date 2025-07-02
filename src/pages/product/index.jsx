@@ -15,7 +15,7 @@ import Carousel from 'react-material-ui-carousel'
 
 import { useTheme } from '@mui/material/styles'
 
-import TemplateDefault from '../templates/Default'
+import TemplateDefault from '../../templates/Default'
 
 const Product = () => {
   const theme = useTheme()
