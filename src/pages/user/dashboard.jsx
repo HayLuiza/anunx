@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Button,
   Card,
@@ -6,27 +8,35 @@ import {
   CardMedia,
   Container,
   Grid,
-  Typography
+  Typography,
 } from '@mui/material'
 
-import TemplateDefault from '../../src/templates/Default'
+import { useTheme } from '@mui/material/styles'
+
+import TemplateDefault from '../../../templates/Default'
 
 export default function Home() {
+  const theme = useTheme()
+
   return (
     <TemplateDefault>
-      <Container maxWidth="sm" sx={{ py: 6 }}>
-        <Typography component="h1" variant="h2" align="center">
+      <Container maxWidth="sm">
+        <Typography component="h1" variant="h2" align="center" sx={{color: '#000000'}}>
           Meus Anúncios
         </Typography>
 
-        <Button variant="contained"
+        <Button
+          variant="contained"
           sx={{
             margin: '30px auto',
-            display: 'block', 
+            display: 'block',
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.secondary.main,
           }}
         >
           Publicar novo anúncio
         </Button>
+
       </Container>
       <Container maxWidth="md">
         <Grid container spacing={4} justifyContent="center">
