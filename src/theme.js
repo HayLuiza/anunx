@@ -11,7 +11,8 @@ const theme = createTheme({
     background: {
       default: 'rgb(242, 244, 245)',
       white: '#ffffff'
-    }
+    },
+    divider: 'rgb(48, 48, 48)',
   },
 })
 
