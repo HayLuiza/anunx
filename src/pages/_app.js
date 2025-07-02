@@ -1,11 +1,13 @@
-// pages/_app.jsx
+
 import * as React from 'react'
+import '../../styles/globals.css'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import createEmotionCache from '../createEmotionCache'
 import { CacheProvider } from '@emotion/react'
 import theme from '../theme'
+
 
 const clientSideEmotionCache = createEmotionCache()
 

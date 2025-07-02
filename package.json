@@ -20,7 +20,8 @@
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-dropzone": "^14.3.8"
+    "react-dropzone": "^14.3.8",
+    "react-material-ui-carousel": "^3.4.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
