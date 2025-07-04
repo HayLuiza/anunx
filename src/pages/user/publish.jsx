@@ -2,12 +2,12 @@
 import { Formik } from 'formik'
 import { object, string, number, date, InferType } from 'yup'
 
-
 import {
   Box,
   Container,
   Select,
   TextField,
+  Input,
   Typography,
   Button,
   IconButton,
@@ -31,12 +31,24 @@ const validationSchema = object({
     .max(100, 'Título muito grande')
     .required('Campo obrigatório*'),
 
-  category: string().required('Campo obrigatório*')
+  category: string().required('Campo obrigatório*'),
+
+  description: string()
+    .min(50, 'Escreva uma descrição com pelo menos 50 caracteres.')
+    .max(5000, 'Descrição muito grande')
+    .required('Campo obrigatório*'),
 })
 
+
 const Publish = () => {
-  const [files, setFiles] = useState([])
   const theme = useTheme()
+  
+  const inputLabel = {
+    fontWeight: '400',
+    color: theme.palette.primary.main,
+  }
+
+  const [files, setFiles] = useState([])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -59,6 +71,7 @@ const Publish = () => {
         initialValues={{
           title: '',
           category: '',
+          description: '',
         }}
         validationSchema={validationSchema}
       >
@@ -84,29 +97,34 @@ const Publish = () => {
 
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
+
                     <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
                       Título do Anúncio
                     </Typography>
-                    <TextField
-                      name="title"
-                      value={values.title}
-                      onChange={handleChange}
-                      label="ex.: Bicicleta Aro 18 com garantia" 
-                      size="small"
-                      error={errors.title}
-                      helperText={errors.title}
-                      fullWidth 
-                    />
+                    <FormControl error={errors.title} fullWidth>
+                      <InputLabel>ex.: Bicicleta Aro 18 com garantia</InputLabel>
+                      <Input
+                        name="title"
+                        value={values.title}
+                        onChange={handleChange}
+                      />
+                      <FormHelperText>
+                        { errors.title }
+                      </FormHelperText>
+                    </FormControl>
+
                     <br /><br />
-                    <Typography component="h6" variant="h6" color="textPrimary">
-                      Categoria
-                    </Typography>
-                    <FormControl error={errors.category} fullWidth>
+
+                    <FormControl error={errors.category} variant="outlined" fullWidth>
+                      <InputLabel id="category-label" sx={inputLabel}>Categoria</InputLabel>
                       <Select
+                        labelId="category-label"
+                        id="category"
                         name="category"
                         value={values.category}
                         fullWidth
                         onChange={handleChange}
+                        label="Categoria"
                       >
                         <MenuItem value="Bebê e Criança">Bebê e Criança</MenuItem>
                         <MenuItem value="Agricultura">Agricultura</MenuItem>
@@ -224,7 +242,17 @@ const Publish = () => {
                     <Typography component="div" variant="body2" color="textPrimary">
                       Escreva os detalhes do que está vendendo
                     </Typography>
-                    <TextField multiline rows={6} variant="outlined" fullWidth />
+                    <FormControl error={errors.description} fullWidth>
+                      <Input
+                      name="description"
+                        multiline rows={6} 
+                        variant="outlined" 
+                      />
+                      <FormHelperText>
+                        { errors.description }
+                      </FormHelperText>
+                    </FormControl>
+
                   </Box>
                 </Container>
 
