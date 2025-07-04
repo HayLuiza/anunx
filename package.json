@@ -16,12 +16,14 @@
     "@mui/icons-material": "^7.1.1",
     "@mui/material": "^7.1.2",
     "@mui/material-nextjs": "^7.1.1",
+    "formik": "^2.4.6",
     "next": "15.3.3",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
-    "react-material-ui-carousel": "^3.4.2"
+    "react-material-ui-carousel": "^3.4.2",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

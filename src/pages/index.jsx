@@ -40,7 +40,7 @@ const Home = () => {
         <Grid container spacing={4} justifyContent="center">
           <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
             <Card
-              image={'https://picsum.photos/600/400'}
+              image={'https://picsum.photos/600/400?random=1'}
               title={'Produto W'}
               subtitle={'R$ 80,00'}
             />      
@@ -48,7 +48,7 @@ const Home = () => {
 
           <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
             <Card
-              image={'https://picsum.photos/600/400'}
+              image={'https://picsum.photos/600/400?random=2'}
               title={'Produto X'}
               subtitle={'R$ 60,00'}
             />
@@ -56,7 +56,7 @@ const Home = () => {
           
           <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
             <Card
-              image={'https://picsum.photos/600/400'}
+              image={'https://picsum.photos/600/400?random=3'}
               title={'Produto Y'}
               subtitle={'R$ 70,00'}
             />
@@ -64,7 +64,7 @@ const Home = () => {
 
           <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
             <Card
-              image={'https://picsum.photos/600/400'}
+              image={'https://picsum.photos/600/400?random=4'}
               title={'Produto Z'}
               subtitle={'R$ 90,00'}
             />
