@@ -14,22 +14,29 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
 export default function SignInSide() {
   return (
-    <Grid container component="main" sx={{ height: '100vh' }}>
+    <Grid container component="main" sx={{ 
+      height: '100vh', 
+      backgroundImage: 'url("https://picsum.photos/1200/800")', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}>
       <CssBaseline />
+      
+      {/* Colocando a imagem do lado direito */}
       <Grid
         item
         xs={false}
-        sm={4}
+        sm={8}
         md={7}
         sx={{
-          backgroundImage: 'url(https://source.unsplash.com/random)',
-          backgroundRepeat: 'no-repeat',
           backgroundColor: '#ccc',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      
+      <Grid item xs={12} sm={4} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
             my: 8,

@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import createEmotionCache from '../createEmotionCache'
 import { CacheProvider } from '@emotion/react'
+import { ToastyProvider } from '../contexts/Toasty'
 import theme from '../theme'
 
 
@@ -21,8 +22,10 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <ToastyProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ToastyProvider>
       </ThemeProvider>
     </CacheProvider>
   )
