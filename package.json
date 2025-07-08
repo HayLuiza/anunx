@@ -17,6 +17,7 @@
     "@mui/material": "^7.1.2",
     "@mui/material-nextjs": "^7.1.1",
     "formik": "^2.4.6",
+    "mongoose": "^8.16.2",
     "next": "15.3.3",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
