@@ -1,8 +1,10 @@
 "use client"
 
+import Image from 'next/image'
 import { Formik } from 'formik'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { signIn, useSession } from 'next-auth/client'
 
 import {
   Box,
@@ -14,6 +16,7 @@ import {
   InputLabel,
   FormHelperText,
   CircularProgress,
+  Alert,
 } from '@mui/material'
 
 import { useTheme } from '@mui/material/styles'
@@ -26,9 +29,20 @@ const Signin = () => {
   const theme = useTheme()
   const router = useRouter()
   const { setToasty } = UseToasty()
+  const [ session ] = useSession()
 
   const handleFormSubmit = async values => {
-    
+    signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      callbackUrl: '/user/dashboard'
+    })
+  }
+
+  const handleGoogleLogin = () => {
+    signIn('google', {
+      callbackUrl: '/user/dashboard'
+    })
   }
 
   const inputLabel = {
@@ -55,6 +69,15 @@ const Signin = () => {
             
             return (
               <form onSubmit={handleSubmit}>
+                {
+                  router.query.i === '1'
+                    ? (
+                      <Alert severity="error" sx={{ margin: '20px 0'}}>
+                        Usuário ou senha inválidos
+                      </Alert>
+                    )
+                    : null
+                }
                 <Container maxWidth="sm" >
                   <Typography component="h1" variant="h2" align="center" color="textPrimary">
                     Entre na sua conta
@@ -65,6 +88,46 @@ const Signin = () => {
 
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
+                    <Box display="flex" justifyContent="center">
+                      <Button 
+                        variant="contained"
+                        color="primary"
+                        startIcon={
+                          <Image 
+                            src="/images/logo_google.png"
+                            width={20}
+                            height={20}
+                            alt="Login com Google"
+                          />
+                        }
+                        onClick={handleGoogleLogin}
+                      >
+                        Entrar com Google
+                      </Button>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '100%',
+                        height: 1,
+                        my: 4,
+                        '&::before, &::after': {
+                          content: '""',
+                          flex: 1,
+                          height: '1px',
+                          backgroundColor: '#ccc',
+                        },
+                        '& span': {
+                          backgroundColor: 'white',
+                          padding: '0 30px',
+                          color: '#666',
+                        },
+                      }}
+                    >
+                      <span>ou</span>
+                    </Box>
                   
                     <FormControl error={errors.email && touched.email} fullWidth>
                       <InputLabel sx={inputLabel}>E-mail</InputLabel>
@@ -116,10 +179,6 @@ const Signin = () => {
                         )
                     }
 
-
-                    <Typography>
-                      Cadastre-se
-                    </Typography>
                   </Box>
                 </Container>
               </form>
