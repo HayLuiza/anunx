@@ -25,7 +25,7 @@ import TemplateDefault from '../../../templates/Default'
 import { initialValues, validationSchema } from './formValues'
 import UseToasty from '../../../contexts/Toasty'
 
-const Signin = () => {
+const Signin = ({ APP_URL }) => {
   const theme = useTheme()
   const router = useRouter()
   const { setToasty } = UseToasty()
@@ -35,13 +35,13 @@ const Signin = () => {
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: 'http://localhost:3000/user/dashboard',
+      callbackUrl: `${APP_URL}/user/dashboard`,
     })
   }
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: 'http://localhost:3000/user/dashboard',
+      callbackUrl: `${APP_URL}/user/dashboard`,
     })
   }
 
@@ -189,6 +189,12 @@ const Signin = () => {
       </Formik>
     </TemplateDefault>
   )
+}
+
+Signin.getServerSideProps = async function() {
+  return {
+    APP_URL: process.env.APP_URL
+  }
 }
 
 export default Signin
