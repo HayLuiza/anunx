@@ -12,7 +12,7 @@ import { useTheme } from '@mui/material/styles'
 import TemplateDefault from '../../../templates/Default'
 import Card from '../../../components/Card'
 
-export default function Home() {
+const Home = () => {
   const theme = useTheme()
 
   return (
@@ -114,3 +114,7 @@ export default function Home() {
     </TemplateDefault>
   )
 }
+
+Home.requireAuth = true
+
+export default Home

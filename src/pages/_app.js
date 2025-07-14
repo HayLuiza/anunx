@@ -8,6 +8,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material'
 import createEmotionCache from '../createEmotionCache'
 import { CacheProvider } from '@emotion/react'
 import { ToastyProvider } from '../contexts/Toasty'
+import CheckAuth from '../components/CheckAuth'
 import theme from '../theme'
 
 
@@ -26,7 +27,11 @@ export default function MyApp(props) {
         <ThemeProvider theme={theme}>
           <ToastyProvider>
             <CssBaseline />
-            <Component {...pageProps} />
+            {
+              Component.requireAuth
+                ? <CheckAuth Component={Component} pageProps={pageProps} />
+                : <Component {...pageProps} />
+            }
           </ToastyProvider>
         </ThemeProvider>
       </Provider>

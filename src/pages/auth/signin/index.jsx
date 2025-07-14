@@ -35,13 +35,13 @@ const Signin = ({ APP_URL }) => {
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: `${APP_URL}/user/dashboard`,
+      callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/user/dashboard`,
     })
   }
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: `${APP_URL}/user/dashboard`,
+      callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/user/dashboard`,
     })
   }
 
@@ -189,12 +189,6 @@ const Signin = ({ APP_URL }) => {
       </Formik>
     </TemplateDefault>
   )
-}
-
-Signin.getServerSideProps = async function() {
-  return {
-    APP_URL: process.env.APP_URL
-  }
 }
 
 export default Signin
