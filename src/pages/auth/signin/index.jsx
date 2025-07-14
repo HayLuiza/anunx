@@ -35,13 +35,13 @@ const Signin = () => {
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: '/user/dashboard'
+      callbackUrl: 'http://localhost:3000/user/dashboard',
     })
   }
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: '/user/dashboard'
+      callbackUrl: 'http://localhost:3000/user/dashboard',
     })
   }
 
