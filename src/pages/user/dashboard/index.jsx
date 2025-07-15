@@ -14,6 +14,7 @@ import TemplateDefault from '../../../templates/Default'
 import ProductsModel from '../../../models/products'
 import dbConnect from '../../../utils/dbConnect'
 import Card from '../../../components/Card'
+import { formatCurrency } from '../../../utils/currency'
 
 const Home = ({ products }) => {
   const theme = useTheme()
@@ -46,7 +47,7 @@ const Home = ({ products }) => {
                 <Card
                   image={`/uploads/${product.files[0].name}`}
                   title={product.title}
-                  subtitle={product.price}
+                  subtitle={formatCurrency(product.price)}
                   actions={
                     <>
                       <Button size="small" color="primary">
