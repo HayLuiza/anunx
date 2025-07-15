@@ -8,11 +8,14 @@ import {
 } from '@mui/material'
 
 import { useTheme } from '@mui/material/styles'
+import { getSession } from 'next-auth/client'
 
 import TemplateDefault from '../../../templates/Default'
+import ProductsModel from '../../../models/products'
+import dbConnect from '../../../utils/dbConnect'
 import Card from '../../../components/Card'
 
-const Home = () => {
+const Home = ({ products }) => {
   const theme = useTheme()
 
   return (
@@ -37,78 +40,27 @@ const Home = () => {
       </Container>
       <Container maxWidth="md">
         <Grid container spacing={4} justifyContent="center">
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400'}
-              title={'Produto W'}
-              subtitle={'R$ 80,00'}
-              actions={
-                <>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Remover
-                  </Button>
-                </>
-              }
-            />      
-          </Grid>
-
-          
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400'}
-              title={'Produto X'}
-              subtitle={'R$ 60,00'}
-              actions={
-                <>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Remover
-                  </Button>
-                </>
-              }
-            />
-          </Grid>          
-          
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400'}
-              title={'Produto Y'}
-              subtitle={'R$ 70,00'}
-              actions={
-                <>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Remover
-                  </Button>
-                </>
-              }
-            />
-          </Grid>
-
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400'}
-              title={'Produto Z'}
-              subtitle={'R$ 90,00'}
-              actions={
-                <>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Remover
-                  </Button>
-                </>
-              }
-            />
-          </Grid>
+          {
+            products.map(product => (
+              <Grid key={product._id} sx={{ xs: 12, sm: 6, md: 4 }}>
+                <Card
+                  image={`/uploads/${product.files[0].name}`}
+                  title={product.title}
+                  subtitle={product.price}
+                  actions={
+                    <>
+                      <Button size="small" color="primary">
+                        Editar
+                      </Button>
+                      <Button size="small" color="primary">
+                        Remover
+                      </Button>
+                    </>
+                  }
+                />      
+              </Grid>
+            ))
+          }
         </Grid>
       </Container>
     </TemplateDefault>
@@ -116,5 +68,18 @@ const Home = () => {
 }
 
 Home.requireAuth = true
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req })
+  await dbConnect()
+
+  const products = await ProductsModel.find({ 'user.id': session.userId })
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    }
+  }
+}
 
 export default Home
