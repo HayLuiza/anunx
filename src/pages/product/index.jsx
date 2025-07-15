@@ -30,7 +30,7 @@ const Product = () => {
     <TemplateDefault>
       <Container maxWidth="lg">
         <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} md={9}>
+          <Grid xs={12} md={9}>
             <Box sx={boxStyle}>
               <Carousel
                 autoPlay={false}
@@ -77,7 +77,7 @@ const Product = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={3}>
+          <Grid xs={12} md={3}>
             <Card elevation={0} sx={boxStyle}>
               <CardHeader
                 avatar={<Avatar>H</Avatar>}

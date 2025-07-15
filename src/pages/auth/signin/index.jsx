@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Formik } from 'formik'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'next-auth/client'
+import { useSession, signIn } from 'next-auth/client'
 
 import {
   Box,
@@ -25,11 +25,11 @@ import TemplateDefault from '../../../templates/Default'
 import { initialValues, validationSchema } from './formValues'
 import UseToasty from '../../../contexts/Toasty'
 
-const Signin = ({ APP_URL }) => {
+const Signin = () => {
   const theme = useTheme()
   const router = useRouter()
   const { setToasty } = UseToasty()
-  const [ session ] = useSession()
+  const [session, loading] = useSession()
 
   const handleFormSubmit = async values => {
     signIn('credentials', {

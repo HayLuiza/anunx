@@ -23,28 +23,28 @@ const Footer = () => {
       })}
     >
       <Grid container spacing={3} justifyContent="space-around">
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#">
               <Typography color="text.secondary" variant="subtitle1" sx={{textDecoration: 'none'}}>Ajuda e Contato</Typography>
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
               <Typography color="text.secondary" variant="subtitle1" sx={{textDecoration: 'none'}}>Dicas de Segurança</Typography>
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
               <Typography color="text.secondary" variant="subtitle1" sx={{textDecoration: 'none'}}>Anunciar e Vender</Typography>
             </Link>
           </Box>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
               <Typography color="text.secondary" variant="subtitle1" sx={{textDecoration: 'none'}}>Plano profissional</Typography>
