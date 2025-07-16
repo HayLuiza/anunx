@@ -77,6 +77,21 @@ const post = async (req, res) => {
   })
 }
 
+const remove = async (req, res) => {
+  await dbConnect()
+
+  const id = req.body.id
+
+  const deleted = await ProductsModel.findOneAndDelete({ _id: id })
+
+  if (deleted) {
+    return res.status(200).json({ sucess: true })
+  } else {
+    return res.status(500).json({ sucess: false })
+  }
+}
+
 export {
   post,
+  remove,
 }
