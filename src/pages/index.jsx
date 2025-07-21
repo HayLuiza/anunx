@@ -1,5 +1,8 @@
 "use client"
 
+import Link from 'next/link'
+import slugify from 'slugify'
+
 import {
   Paper,
   Container,
@@ -13,8 +16,11 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import TemplateDefault from '../templates/Default'
 import Card from '../components/Card'
+import dbConnect from '../utils/dbConnect'
+import ProductsModel from '../models/products'
+import { formatCurrency } from '../utils/currency'
 
-const Home = () => {
+const Home = ({ products }) => {
   return (
     <TemplateDefault>
       <Container maxWidth="md">
@@ -38,41 +44,42 @@ const Home = () => {
         </Typography>
         <br />
         <Grid container spacing={4} justifyContent="center">
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400?random=1'}
-              title={'Produto W'}
-              subtitle={'R$ 80,00'}
-            />      
-          </Grid>
+          {
+            products.map(product => {
+              const category = slugify(product.category).toLocaleLowerCase()
+              const title = slugify(product.title).toLocaleLowerCase()
 
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400?random=2'}
-              title={'Produto X'}
-              subtitle={'R$ 60,00'}
-            />
-          </Grid>          
-          
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400?random=3'}
-              title={'Produto Y'}
-              subtitle={'R$ 70,00'}
-            />
-          </Grid>
-
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
-            <Card
-              image={'https://picsum.photos/600/400?random=4'}
-              title={'Produto Z'}
-              subtitle={'R$ 90,00'}
-            />
-          </Grid>
+              return (
+                <Grid key={product._id} sx={{ xs: 12, sm: 6, md: 4 }}>
+                  <Link href={`/${category}/${title}/${product._id}`} passHref>
+                    <Card
+                      image={`/uploads/${product.files[0].name}`}
+                      title={product.title}
+                      subtitle={formatCurrency(product.price)}
+                    />      
+                  </Link>
+                </Grid>
+              )
+            })
+          }
         </Grid>
       </Container>
     </TemplateDefault>
   )
+}
+
+export async function getServerSideProps() {
+  await dbConnect()
+
+  const products = await ProductsModel.aggregate([{
+    $sample: { size: 6 }
+  }])
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products))
+    }
+  }
 }
 
 export default Home
