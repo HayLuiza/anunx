@@ -50,6 +50,8 @@ const post = async (req, res) => {
       phone,
       userId,
       image,
+      state,
+      city,
     } = fields
 
     const product = new ProductsModel({
@@ -63,6 +65,10 @@ const post = async (req, res) => {
         email,
         phone,
         image,
+      },
+      location: {
+        state,
+        city,
       },
       files: filesToSave,
     })

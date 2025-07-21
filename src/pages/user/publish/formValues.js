@@ -9,6 +9,8 @@ const initialValues = {
   email: '',
   phone: '',
   files: [],
+  state: '',
+  city: '',
 }
 
 const validationSchema = object({
@@ -33,6 +35,10 @@ const validationSchema = object({
   phone: number().required('Campo obrigatório*'),
 
   files: array().min(1, 'Envie pelo menos uma foto').required('Campo obrigatório*'),
+
+  state: string().required('Campo obrigatório*'),
+  
+  city: string().required('Campo obrigatório*'),
 })
 
 export {

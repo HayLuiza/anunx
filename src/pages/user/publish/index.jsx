@@ -39,6 +39,14 @@ const Publish = ({ userId, image }) => {
   formValues.image = image
 
   console.log(formValues)
+
+  const statesList = [
+  "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo", 
+  "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", 
+  "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", 
+  "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", 
+  "São Paulo", "Sergipe", "Tocantins"
+]
   
   const inputLabel = {
     fontWeight: '400',
@@ -219,6 +227,47 @@ const Publish = ({ userId, image }) => {
                       />
                       <FormHelperText>
                         { errors.price && touched.price ? errors.price : null }
+                      </FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Container>
+
+                <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
+                  <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
+                    <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
+                      Localização
+                    </Typography>
+
+                    <FormControl error={errors.city && touched.city} fullWidth>
+                      <InputLabel sx={inputLabel}>Cidade</InputLabel>
+                      <Input
+                        name="city"
+                        value={values.city}
+                        onChange={handleChange}
+                      />
+                      <FormHelperText>
+                        { errors.city && touched.city ? errors.city : null }
+                      </FormHelperText>
+                    </FormControl>
+
+                    <br /><br />
+                    
+                    <FormControl error={errors.state && touched.state} fullWidth>
+                      <InputLabel sx={inputLabel}>Estado</InputLabel>
+                      <Select
+                        name="state"
+                        value={values.state}
+                        onChange={handleChange}
+                        label="Estado"
+                      >
+                        {statesList.map((state, index) => (
+                          <MenuItem key={index} value={state}>
+                            {state}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <FormHelperText>
+                        {errors.state && touched.state ? errors.state : null}
                       </FormHelperText>
                     </FormControl>
                   </Box>

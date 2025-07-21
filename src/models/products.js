@@ -32,7 +32,19 @@ const schema = new mongoose.Schema({
   files: {
     type: [filesSchema],
     default: undefined,
+  },
+  location: {
+    city: {
+      type: String,
+      required: [true, 'O campo "cidade" é obrigatório.']
+    },
+    state: {
+      type: String,
+      required: [true, 'O campo "estado" é obrigatório.']
+    },
   }
+}, {
+  timestamps: true
 })
 
 export default mongoose.models.products || mongoose.model('products', schema)
