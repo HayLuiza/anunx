@@ -1,7 +1,9 @@
 "use client"
 
+import React from 'react'
 import Link from 'next/link'
 import slugify from 'slugify'
+import { useRouter } from 'next/router'
 
 import {
   Paper,
@@ -21,6 +23,15 @@ import ProductsModel from '../models/products'
 import { formatCurrency } from '../utils/currency'
 
 const Home = ({ products }) => {
+  const router = useRouter()
+  const [search, setSearch] = React.useState()
+
+  const handleSubmitSearch = () => {
+    router.push({
+      pathname: `/search/${search}`,
+    })
+  }
+
   return (
     <TemplateDefault>
       <Container maxWidth="md">
@@ -29,10 +40,11 @@ const Home = ({ products }) => {
         </Typography>
         <Paper sx={{display: 'flex', justifyContent: 'center', padding: '0px 10px', marginTop: 5}}>
           <InputBase
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Ex.: Iphone 12 com garantia"
             fullWidth
           />
-          <IconButton>
+          <IconButton onClick={handleSubmitSearch}>
             <SearchIcon />
           </IconButton>
         </Paper>       
