@@ -1,13 +1,8 @@
-import React from 'react'
 import Link from 'next/link'
 import slugify from 'slugify'
-import { useRouter } from 'next/router'
 
 import {
-  Paper,
   Container,
-  IconButton,
-  InputBase,
   Box,
   Grid,
   Typography,
@@ -15,37 +10,20 @@ import {
 
 import { useTheme } from '@mui/material/styles'
 
-import SearchIcon from '@mui/icons-material/Search'
 
 import TemplateDefault from '../../templates/Default'
 import Card from '../../components/Card'
 import ProductsModel from '../../models/products'
 import { formatCurrency } from '../../utils/currency'
+import Search from '../../components/Search'
 
 const List = ({ products, q }) => {
-  const router = useRouter()
-  const [search, setSearch] = React.useState()
   const theme = useTheme()
-
-  const handleSubmitSearch = () => {
-    router.push({
-      pathname: `/search/${search}`,
-    })
-  }
 
   return (
     <TemplateDefault>
       <Container maxWidth="lg">
-        <Paper sx={{display: 'flex', justifyContent: 'center', padding: '0px 10px'}}>
-          <InputBase
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Ex.: Iphone 12 com garantia"
-            fullWidth
-          />
-          <IconButton onClick={handleSubmitSearch}>
-            <SearchIcon />
-          </IconButton>
-        </Paper>       
+        <Search />    
       </Container>
 
       <Container maxWidth="lg" sx={{py: 3}}>

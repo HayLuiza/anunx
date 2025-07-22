@@ -29,7 +29,9 @@ export default function ButtonAppBar() {
           <Toolbar>
             
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Anunx
+              <Link  href={'/'}>
+                Anunx 
+              </Link>
             </Typography>
             <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
               <Button color="inherit" variant="outlined" sx={{ textDecoration: 'none'}}>
