@@ -8,17 +8,26 @@ import {
 
 const Card = ({image, title, subtitle, actions }) => {
   return (
-    <CardMUI>
+    <CardMUI
+      sx={{
+        width: 350,
+        height: 320,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <CardMedia
         sx={{
-          paddingTop: '56%',
-          width: 350,
+          height: 200,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+           
         }}
         image={image}
         title={title}
       />
-      <CardContent>
-        <Typography variant="h5" component="h2">
+      <CardContent sx={{ flexGrow: 1 }}>
+        <Typography variant="h5" component="h2" sx={{ fontSize: 20 }}>
           {title}
         </Typography>
         <Typography>

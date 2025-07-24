@@ -110,7 +110,7 @@ const Home = ({ products }) => {
           </Button>        
         </Link>
       </Container>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         {
           products.length === 0 ? (
             <Box
@@ -129,7 +129,7 @@ const Home = ({ products }) => {
                   if (removedProducts.includes(product._id)) return null
 
                   return (
-                    <Grid key={product._id} sx={{ xs: 12, sm: 6, md: 4 }}>
+                    <Grid key={product._id} sx={{ xs: 12, sm: 5, md: 3 }}>
                       <Card
                         image={`/uploads/${product.files[0].name}`}
                         title={product.title}

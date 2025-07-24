@@ -15,33 +15,57 @@ import {
   MenuItem, 
 } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
+import Image from 'next/image';
 
 export default function ButtonAppBar() {
-  const [anchorUseMenu, setAnchorUseMenu] = React.useState(false)
+  const [anchorUserMenu, setAnchorUseMenu] = React.useState(false)
   const [ session ] = useSession()
 
-  const openUserMenu = Boolean(anchorUseMenu)
+  const openUserMenu = Boolean(anchorUserMenu)
 
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static" elevation={3} sx={{backgroundColor:"#000000"}}>
-        <Container maxWidth="lg">
-          <Toolbar>
-            
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link  href={'/'}>
-                Anunx 
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" elevation={3} sx={{backgroundColor:"#0B0B3D"}}>
+        <Container maxWidth="lg" sx={{ width: '100%', padding: 0 }}>
+          <Toolbar disableGutters>            
+            <Box sx={{ flexGrow: 1 }}>
+              <Link href="/" passHref>
+                <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <Image
+                    src="/images/logo_anunx.png"
+                    width={150}
+                    height={100}
+                    alt="Logo Anunx"
+                    style={{ objectFit: 'contain' }}
+                  />
+                </Box>
               </Link>
-            </Typography>
+            </Box>
             <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
-              <Button color="inherit" variant="outlined" sx={{ textDecoration: 'none'}}>
+              <Button color="inherit" variant="outlined" 
+                sx={{ 
+                  textDecoration: 'none',
+                  fontSize: {
+                    xs: '0.7rem',  
+                    sm: '0.9rem',
+                  },
+                  padding: {
+                    xs: '4px 6px',
+                    sm: '6px 12px',
+                  },
+                  margin: {
+                    xs: 'auto 1px',
+                    sm: 2,
+                  }
+                }}
+              >
                 Anunciar e Vender
               </Button>            
             </Link>
             {
               session
                 ? (
-                  <IconButton sx={{ color: '#ffffff', marginLeft: 2, }} onClick={(e) => setAnchorUseMenu(e.currentTarget)}>
+                  <IconButton sx={{ color: '#ffffff'}} onClick={(e) => setAnchorUseMenu(e.currentTarget)}>
                     {
                       session.user.image
                         ? <Avatar src={session.user.image} />
@@ -55,11 +79,11 @@ export default function ButtonAppBar() {
             }
 
             <Menu
-              anchorEl={anchorUseMenu}
+              anchorEl={anchorUserMenu}
               open={openUserMenu}
               onClose={() => setAnchorUseMenu(null)}
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right',
               }}
             >
@@ -81,5 +105,5 @@ export default function ButtonAppBar() {
         </Container>
       </AppBar>
     </Box>
-  );
+  )
 }
