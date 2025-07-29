@@ -39,12 +39,15 @@ const Home = ({ products }) => {
             products.map(product => {
               const category = slugify(product.category).toLocaleLowerCase()
               const title = slugify(product.title).toLocaleLowerCase()
+              const image = product.files?.[0]?.name
+                ? `/uploads/${product.files[0].name}`
+                : '/sem-imagem.jpg'
 
               return (
                 <Grid key={product._id} sx={{ xs: 12, sm: 6, md: 4 }}>
                   <Link href={`/${category}/${title}/${product._id}`} passHref>
                     <Card
-                      image={`/uploads/${product.files[0].name}`}
+                      image={image}
                       title={product.title}
                       subtitle={formatCurrency(product.price)}
                     />      

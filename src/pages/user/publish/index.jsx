@@ -21,7 +21,7 @@ import { useTheme } from '@mui/material/styles'
 
 import TemplateDefault from '../../../templates/Default'
 import { initialValues, validationSchema } from './formValues'
-import FileUpload from '../../../components/fileUpload'
+import FileUpload from '../../../components/FileUpload'
 import useToasty from '../../../contexts/Toasty'
 import axios from 'axios'
 import { getSession } from 'next-auth/client'
@@ -113,6 +113,7 @@ const Publish = ({ userId, image }) => {
                 <Input type="hidden" name="userId" value={values.userId} />
                 <Input type="hidden" name="image" value={values.image} />
 
+                {/*TÍTULO DA PÁGINA*/}
                 <Container maxWidth="sm" >
                   <Typography component="h1" variant="h2" align="center" color="textPrimary">
                     Publicar Anúncio
@@ -124,6 +125,7 @@ const Publish = ({ userId, image }) => {
 
                 <br/> <br/>
 
+                {/*TITULO E CATEGORIA DO PRODUTO*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
 
@@ -179,6 +181,7 @@ const Publish = ({ userId, image }) => {
                   </Box>
                 </Container>
 
+                {/*ARQUIVOS*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
                     <FileUpload 
@@ -190,6 +193,7 @@ const Publish = ({ userId, image }) => {
                   </Box>
                 </Container>
 
+                {/*DESCRICAO*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
                     <Typography component="h6" variant="h6" color="textPrimary">
@@ -213,6 +217,7 @@ const Publish = ({ userId, image }) => {
                   </Box>
                 </Container>
 
+                {/*PRECO*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
                     <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
@@ -233,6 +238,7 @@ const Publish = ({ userId, image }) => {
                   </Box>
                 </Container>
 
+                {/*LOCALIZACAO*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
                     <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
@@ -273,7 +279,8 @@ const Publish = ({ userId, image }) => {
                     </FormControl>
                   </Box>
                 </Container>
-
+                
+                {/*CONTATO*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box sx={{ backgroundColor: theme.palette.common.white, padding: theme.spacing(3) }}>
                     <Typography component="h6" variant="h6" color="textPrimary" gutterBottom>
@@ -319,7 +326,8 @@ const Publish = ({ userId, image }) => {
 
                   </Box>
                 </Container>
-
+                
+                {/*BOTAO PUBLICAR*/}
                 <Container maxWidth="md" sx={{ paddingBottom: theme.spacing(3) }}>
                   <Box textAlign="right">
                     {

@@ -14,16 +14,10 @@ const post = async (req, res) => {
   })
 
   form.parse(req, async (error, fields, data) => {
-    if (error) {
-      return res.status(500).json({ success: false })
-    }
+    if (error) return res.status(500).json({ success: false })
 
     const { files } = data
-
-    const filesToRename = files instanceof Array 
-      ? files
-      : [files]
-
+    const filesToRename = files instanceof Array ? files : [files]
     const filesToSave = []
 
     await Promise.all(filesToRename.map(file => {
@@ -34,7 +28,7 @@ const post = async (req, res) => {
 
       filesToSave.push({
         name: filename,
-        path: newpath,
+        path: `/uploads/${filename}`,
       })
 
       return fs.promises.rename(oldpath, newpath)
@@ -91,13 +85,98 @@ const remove = async (req, res) => {
   const deleted = await ProductsModel.findOneAndDelete({ _id: id })
 
   if (deleted) {
-    return res.status(200).json({ sucess: true })
+    return res.status(200).json({ success: true })
   } else {
-    return res.status(500).json({ sucess: false })
+    return res.status(500).json({ success: false })
   }
+}
+
+const edit = async (req, res) => {
+  await dbConnect()
+
+  const form = new formidable.IncomingForm({
+    multiples: true,
+    uploadDir: 'public/uploads',
+    keepExtensions: true,
+  })
+
+  form.parse(req, async (err, fields, data) => {
+    if (err) return res.status(500).json({ success: false })
+
+    const { id } = req.query
+    const product = await ProductsModel.findById(id)
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: 'Produto não encontrado.' })
+    }
+
+    const {
+      title,
+      category,
+      description,
+      price,
+      name,
+      email,
+      phone,
+      userId,
+      image,
+      state,
+      city,
+    } = fields
+
+    product.title = title || product.title
+    product.category = category || product.category
+    product.description = description || product.description
+    product.price = price || product.price
+
+    product.user = {
+      id: userId,
+      name,
+      email,
+      phone,
+      image,
+    }
+
+    product.location = {
+      city,
+      state,
+    }
+
+    const { files } = data
+    const newFiles = []
+
+    if (files) {
+      const filesToRename = files instanceof Array ? files : [files]
+
+      await Promise.all(filesToRename.map(file => {
+        const extension = path.extname(file.name)
+        const filename = `${Date.now()}_${Math.floor(Math.random() * 99999999)}${extension}`
+        const oldpath = file.path
+        const newpath = path.join(process.cwd(), form.uploadDir, filename)
+
+        newFiles.push({
+          name: filename,
+          path: `/uploads/${filename}`,
+        })
+
+        return fs.promises.rename(oldpath, newpath)
+      }))
+    }
+
+    product.files = [...product.files, ...newFiles]
+
+    const updatedProduct = await product.save()
+
+    if (updatedProduct) {
+      return res.status(200).json({ success: true, product: updatedProduct })
+    } else {
+      return res.status(500).json({ success: false })
+    }
+  })
 }
 
 export {
   post,
   remove,
+  edit,
 }

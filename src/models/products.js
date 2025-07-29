@@ -31,7 +31,7 @@ const schema = new mongoose.Schema({
   },
   files: {
     type: [filesSchema],
-    default: undefined,
+    default: () => [],
   },
   location: {
     city: {
