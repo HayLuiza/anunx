@@ -24,6 +24,7 @@ import { useTheme } from '@mui/material/styles'
 import TemplateDefault from '../../../templates/Default'
 import { initialValues, validationSchema } from './formValues'
 import UseToasty from '../../../contexts/Toasty'
+import Link from 'next/link'
 
 const Signin = () => {
   const theme = useTheme()
@@ -32,11 +33,22 @@ const Signin = () => {
   const [session, loading] = useSession()
 
   const handleFormSubmit = async values => {
-    signIn('credentials', {
+    const result = await signIn('credentials', {
+      redirect: false,
       email: values.email,
       password: values.password,
       callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/user/dashboard`,
     })
+
+    if (result?.error) {
+      setToasty({
+        open: true,
+        severity: 'error',
+        text: 'Usuário e/ou senha inválidos',
+      })
+    } else {
+      router.push(result.url)
+    }
   }
 
   const handleGoogleLogin = () => {
@@ -69,15 +81,6 @@ const Signin = () => {
             
             return (
               <form onSubmit={handleSubmit}>
-                {
-                  router.query.i === '1'
-                    ? (
-                      <Alert severity="error" sx={{ margin: '20px 0'}}>
-                        Usuário ou senha inválidos
-                      </Alert>
-                    )
-                    : null
-                }
                 <Container maxWidth="sm" >
                   <Typography component="h1" variant="h2" align="center" color="textPrimary">
                     Entre na sua conta
@@ -179,6 +182,11 @@ const Signin = () => {
                         )
                     }
 
+                    <Link href="/auth/signup">
+                      <Typography>
+                        Não tem uma conta? Cadastre-se aqui
+                      </Typography>
+                    </Link>
                   </Box>
                 </Container>
               </form>

@@ -21,6 +21,7 @@ import { useTheme } from '@mui/material/styles'
 import TemplateDefault from '../../../templates/Default'
 import { initialValues, validationSchema } from './formValues'
 import UseToasty from '../../../contexts/Toasty'
+import Link from 'next/link'
 
 const Signup = () => {
   const theme = useTheme()
@@ -158,10 +159,11 @@ const Signup = () => {
                         )
                     }
 
-
-                    <Typography>
-                      Já tem uma nova conta? Entre aqui
-                    </Typography>
+                    <Link href="/auth/signin">
+                      <Typography>
+                        Já tem uma conta? Entre aqui
+                      </Typography>
+                    </Link>
                   </Box>
                 </Container>
               </form>
